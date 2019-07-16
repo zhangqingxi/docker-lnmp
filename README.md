@@ -65,8 +65,8 @@ $ docker-compose restart 服务1 服务2 ...
 # 构建或者重新构建服务
 $ docker-compose build 服务1 服务2 ...
 
-# 进入命令行容器
-$ docker-compose exec 服务 bash
+# 进入命令行容器 alpine镜像【sh】
+$ docker-compose exec 服务 sh
 
 # 删除并且停止容器
 $ docker-compose rm 服务1 服务2 ...
