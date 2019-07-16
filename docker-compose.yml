@@ -1,0 +1,62 @@
+version: '3.7'
+services:
+  nginx:
+    container_name: ${NGINX_CONTAINER_NAME}
+    image: nginx:${NGINX_VERSION}
+    ports:
+      - ${NGINX_HTTP_HOST_PORT}:80
+      - ${NGINX_HTTPS_HOST_PORT}:443
+    volumes:
+      - ${PROJECT_DIR}:/var/www/html/:rw
+      - ${NGINX_CONFD_DIR}:/etc/nginx/conf.d/:rw
+      - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
+      - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
+    restart: always
+    depends_on:
+        - php
+    networks:
+      - default
+
+  php:
+    container_name: ${PHP73_CONTAINER_NAME}
+    build:
+      context: ./server/php73
+      args:
+        PHP_VERSION: ${PHP73_VERSION}
+    ports:
+      - ${PHP73_FPM_PORT}:9000
+    volumes:
+      - ${PROJECT_DIR}:/var/www/html/:rw
+      - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini/:ro
+    restart: always
+    depends_on:
+      - redis
+    networks:
+      - default
+
+  redis:
+    container_name: ${REDIS_CONTAINER_NAME}
+    image: redis:${REDIS_VERSION}
+    ports:
+      - ${REDIS_HOST_PORT}:6379
+    volumes:
+      - ${REDIS_CONF_FILE}:/usr/local/etc/redis/redis.conf
+    command: redis-server
+    networks:
+      - default
+
+  mysql:
+    container_name: ${MYSQL_CONTAINER_NAME}
+    image: mysql:${MYSQL_VERSION}
+    ports:
+      - ${MYSQL_HOST_PORT}:3306
+    volumes:
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql
+      - ${MYSQL_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    networks:
+      - default
+
+networks:
+  default:

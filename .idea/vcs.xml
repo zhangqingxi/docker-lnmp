@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/code/aapay" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/code/aapay_dev" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/code/blog" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/code/byqp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/code/eepay" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/code/mir" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/code/mir1" vcs="Git" />
+  </component>
+</project>
