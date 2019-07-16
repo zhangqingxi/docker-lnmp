@@ -40,6 +40,7 @@ RUN docker-php-ext-install pdo_mysql opcache bcmath
 
 #安装Redis
 RUN pecl install Igbinary \
+    && docker-php-ext-enable igbinary \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && pecl clear-cache
