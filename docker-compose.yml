@@ -8,7 +8,7 @@ services:
       - ${NGINX_HTTPS_HOST_PORT}:443
     volumes:
       - ${PROJECT_DIR}:/var/www/html/:rw
-      - ${NGINX_CONFD_DIR}:/etc/nginx/conf.d/:rw
+      - ${NGINX_CONF_DIR}:/etc/nginx/conf.d/:rw
       - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
       - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
     restart: always
@@ -18,13 +18,13 @@ services:
       - default
 
   php:
-    container_name: ${PHP73_CONTAINER_NAME}
+    container_name: ${PHP81_CONTAINER_NAME}
     build:
-      context: ./server/php73
+      context: ./server/php81
       args:
-        PHP_VERSION: ${PHP73_VERSION}
+        PHP_VERSION: ${PHP81_VERSION}
     ports:
-      - ${PHP73_FPM_PORT}:9000
+      - ${PHP81_FPM_PORT}:9000
     volumes:
       - ${PROJECT_DIR}:/var/www/html/:rw
       - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini/:ro
@@ -35,12 +35,12 @@ services:
       - default
 
   redis:
-    container_name: ${REDIS_CONTAINER_NAME}
-    image: redis:${REDIS_VERSION}
+    container_name: ${REDIS6_CONTAINER_NAME}
+    image: redis:${REDIS6_VERSION}
     ports:
-      - ${REDIS_HOST_PORT}:6379
+      - ${REDIS6_HOST_PORT}:6379
     volumes:
-      - ${REDIS_CONF_FILE}:/usr/local/etc/redis/redis.conf
+      - ${REDIS6_CONF_FILE}:/usr/local/etc/redis/redis.conf
     command: redis-server
     networks:
       - default
